@@ -17,7 +17,9 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <Services />
           <FAQ />
-          <CTA />
+          <div className="mb-4">
+            <CTA />
+          </div>
         </div>
         <ContactForm />
       </main>
