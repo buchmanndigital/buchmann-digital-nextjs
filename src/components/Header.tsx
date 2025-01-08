@@ -31,8 +31,8 @@ export function Header() {
             <Image 
               src="/images/buchmann-digital-logo.png" 
               alt="Buchmann Digital Logo" 
-              width={30} 
-              height={30} 
+              width={25} 
+              height={25} 
               className="mr-2"
             />
             Buchmann Digital

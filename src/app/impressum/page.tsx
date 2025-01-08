@@ -24,17 +24,17 @@ export default function ImpressumPage() {
               <p>E-Mail: info@buchmann.digital</p>
             </div>
 
-            <div>
+            {/* <div>
               <h2 className="text-xl font-semibold mb-3">Umsatzsteuer-ID</h2>
               <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:</p>
               <p>[Ihre USt-IdNr.]</p>
-            </div>
+            </div> */}
 
-            <div>
+            {/* <div>
               <h2 className="text-xl font-semibold mb-3">Berufshaftpflichtversicherung</h2>
               <p>[Name und Sitz der Versicherung]</p>
               <p>Geltungsbereich der Versicherung: Deutschland</p>
-            </div>
+            </div> */}
 
             <div>
               <h2 className="text-xl font-semibold mb-3">Streitschlichtung</h2>
