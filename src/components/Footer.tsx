@@ -98,16 +98,9 @@ export function Footer() {
                 <Button 
                   variant="link" 
                   className="text-gray-600 hover:text-indigo-600 p-0 h-auto font-normal"
+                  onClick={() => router.push('/datenschutz')}
                 >
                   Datenschutz
-                </Button>
-              </li>
-              <li>
-                <Button 
-                  variant="link" 
-                  className="text-gray-600 hover:text-indigo-600 p-0 h-auto font-normal"
-                >
-                  AGB
                 </Button>
               </li>
             </ul>

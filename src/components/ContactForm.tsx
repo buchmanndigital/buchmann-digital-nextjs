@@ -1,11 +1,47 @@
 'use client';
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 export function ContactForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!name || !email) {
+      setStatus('Name und E-Mail sind Pflichtfelder.');
+      return;
+    }
+
+    setStatus('Senden...');
+
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, subject, message }),
+    });
+
+    if (res.ok) {
+      setStatus('Nachricht gesendet!');
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+    } else {
+      setStatus('Fehler beim Senden der Nachricht.');
+    }
+  };
+
   return (
     <section className="w-full bg-gray-900 py-20" id="contact">
       <div className="container mx-auto px-4">
@@ -63,7 +99,7 @@ export function ContactForm() {
 
             {/* Contact Form */}
             <div className="bg-gray-800 p-8 rounded-2xl">
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
@@ -73,6 +109,9 @@ export function ContactForm() {
                       id="name"
                       placeholder="Max Mustermann"
                       className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </div>
                   <div>
@@ -84,6 +123,9 @@ export function ContactForm() {
                       type="email"
                       placeholder="max@beispiel.de"
                       className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                   </div>
                 </div>
@@ -96,6 +138,8 @@ export function ContactForm() {
                     id="subject"
                     placeholder="Wie kann ich Ihnen helfen?"
                     className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
                   />
                 </div>
 
@@ -107,12 +151,15 @@ export function ContactForm() {
                     id="message"
                     placeholder="Ihre Nachricht..."
                     className="h-32 bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                   />
                 </div>
 
-                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
+                <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
                   Nachricht senden
                 </Button>
+                {status && <p className="text-sm text-gray-400 mt-2">{status}</p>}
               </form>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,11 +23,18 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <button 
-            className="text-2xl font-bold"
+            className="text-2xl font-bold flex items-center"
             onClick={() => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
+            <Image 
+              src="/images/buchmann-digital-logo.png" 
+              alt="Buchmann Digital Logo" 
+              width={30} 
+              height={30} 
+              className="mr-2"
+            />
             Buchmann Digital
           </button>
 
