@@ -1,0 +1,123 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Mail, Phone, MapPin } from 'lucide-react';
+
+export function ContactForm() {
+  return (
+    <section className="w-full bg-gray-900 py-20" id="contact">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
+            <div className="text-white">
+              <h2 className="text-4xl font-bold mb-8">Kontaktieren Sie mich</h2>
+              <p className="text-gray-400 mb-12 text-lg">
+                Lassen Sie uns gemeinsam Ihr nächstes Projekt besprechen. Ich freue mich darauf, von Ihnen zu hören.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="bg-indigo-600/20 p-3 rounded-lg">
+                    <Mail className="w-6 h-6 text-indigo-400" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Email</p>
+                    <a 
+                      href="mailto:info@buchmann.digital" 
+                      className="text-white hover:text-indigo-400 transition-colors"
+                    >
+                      info@buchmann.digital
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="bg-indigo-600/20 p-3 rounded-lg">
+                    <Phone className="w-6 h-6 text-indigo-400" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Telefon</p>
+                    <a 
+                      href="tel:+491749165008" 
+                      className="text-white hover:text-indigo-400 transition-colors"
+                    >
+                      +49 (0) 174 9165008
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-4">
+                  <div className="bg-indigo-600/20 p-3 rounded-lg">
+                    <MapPin className="w-6 h-6 text-indigo-400" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Standort</p>
+                    <p className="text-white">Bad Hindelang, Deutschland</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-gray-800 p-8 rounded-2xl">
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      placeholder="Max Mustermann"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="max@beispiel.de"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">
+                    Betreff
+                  </label>
+                  <Input
+                    id="subject"
+                    placeholder="Wie kann ich Ihnen helfen?"
+                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
+                    Nachricht
+                  </label>
+                  <Textarea
+                    id="message"
+                    placeholder="Ihre Nachricht..."
+                    className="h-32 bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                  />
+                </div>
+
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
+                  Nachricht senden
+                </Button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
