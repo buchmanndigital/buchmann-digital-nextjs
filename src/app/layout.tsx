@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title:
-    "Buchmann Digital - Websites und Software die Unternehmen voranbringen",
+    "Websites und Software die Unternehmen voranbringen",
   description:
     "Professionelle Webentwicklung und Softwarelösungen für Ihr Unternehmen",
 };
