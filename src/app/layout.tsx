@@ -1,12 +1,12 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'Buchmann Digital - Websites und Software die Unternehmen voranbringen',
-  description: 'Professionelle Webentwicklung und Softwarelösungen für Ihr Unternehmen',
+  title:
+    "Buchmann Digital - Websites und Software die Unternehmen voranbringen",
+  description:
+    "Professionelle Webentwicklung und Softwarelösungen für Ihr Unternehmen",
 };
 
 export default function RootLayout({
@@ -16,7 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de" className="scroll-smooth">
-      <body className={inter.className}>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
