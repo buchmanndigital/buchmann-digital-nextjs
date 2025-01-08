@@ -41,6 +41,7 @@ export function ContactForm() {
       setStatus('Fehler beim Senden der Nachricht.');
     }
   };
+  
 
   return (
     <section className="w-full bg-gray-900 py-20" id="contact">
