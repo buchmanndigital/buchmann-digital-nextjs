@@ -6,6 +6,7 @@ import { FAQ } from '@/components/FAQ';
 import { ContactForm } from '@/components/ContactForm';
 import { CTA } from '@/components/CTA';
 import { Footer } from '@/components/Footer';
+import { Features } from '@/components/Features';
 
 export default function HomePage() {
   return (
@@ -16,10 +17,11 @@ export default function HomePage() {
         <About />
         <div className="container mx-auto px-4">
           <Services />
+        </div>
+        <Features />
+        <div className="container mx-auto px-4">
           <FAQ />
-          <div className="mb-4">
-            <CTA />
-          </div>
+          <CTA />
         </div>
         <ContactForm />
       </main>
