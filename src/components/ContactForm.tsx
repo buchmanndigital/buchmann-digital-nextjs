@@ -158,7 +158,7 @@ export function ContactForm() {
                 </div>
 
                 <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
-                  Nachricht senden
+                  Unverbindlich anfragen
                 </Button>
                 {status && <p className="text-sm text-gray-400 mt-2">{status}</p>}
               </form>
