@@ -21,7 +21,7 @@ export function CTA() {
     >
       <div className="absolute inset-0 w-full h-full bg-indigo-600 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
       
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full hidden md:block">
         <Boxes />
       </div>
       
