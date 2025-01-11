@@ -109,7 +109,7 @@ export function ContactForm() {
                     <Input
                       id="name"
                       placeholder="Max Mustermann"
-                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -123,7 +123,7 @@ export function ContactForm() {
                       id="email"
                       type="email"
                       placeholder="max@beispiel.de"
-                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -138,7 +138,7 @@ export function ContactForm() {
                   <Input
                     id="subject"
                     placeholder="Wie kann ich Ihnen helfen?"
-                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                   />
@@ -151,7 +151,7 @@ export function ContactForm() {
                   <Textarea
                     id="message"
                     placeholder="Ihre Nachricht..."
-                    className="h-32 bg-gray-700 border-gray-600 text-white placeholder:text-gray-400"
+                    className="h-32 bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                   />
