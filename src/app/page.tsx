@@ -7,6 +7,7 @@ import { ContactForm } from '@/components/ContactForm';
 import { CTA } from '@/components/CTA';
 import { Footer } from '@/components/Footer';
 import { Features } from '@/components/Features';
+import { WebsiteAnalysis } from '@/components/WebsiteAnalysis';
 
 export default function HomePage() {
   return (
@@ -19,7 +20,8 @@ export default function HomePage() {
           <Services />
         </div>
         <Features />
-        <div className="container mx-auto px-4 mb-10">
+        <WebsiteAnalysis />
+        <div className="container mx-auto px-4">
           <FAQ />
           <CTA />
         </div>
