@@ -21,7 +21,7 @@ export default function HomePage() {
         </div>
         <Features />
         <WebsiteAnalysis />
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 mb-10">
           <FAQ />
           <CTA />
         </div>

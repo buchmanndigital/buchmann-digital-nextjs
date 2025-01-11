@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { User, Trophy, Target } from 'lucide-react';
+import { CTA } from './CTA';
 
 export function About() {
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -66,15 +67,7 @@ export function About() {
           </Card>
         </div>
 
-        <div 
-          ref={ctaRef}
-          className="bg-indigo-600 rounded-lg p-12 text-center text-white"
-          style={{ animationDelay: '0.6s' }}
-        >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-2xl mx-auto">
-            Lassen Sie uns gemeinsam Ihr Unternehmen digital transformieren
-          </h2>
-        </div>
+        <CTA />
       </div>
     </section>
   );
