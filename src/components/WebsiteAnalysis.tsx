@@ -122,7 +122,7 @@ export function WebsiteAnalysis() {
             Vielen Dank für Ihre Anfrage!
           </h3>
           <p className="text-gray-600 mb-6">
-            Wir haben Ihre Informationen erhalten und werden uns innerhalb von 24 Stunden bei Ihnen melden.
+            Ich habe Ihre Informationen erhalten und werde mich innerhalb von 24 Stunden bei Ihnen melden.
           </p>
           <Button
             onClick={handleReset}
