@@ -101,9 +101,9 @@ export function WebsiteAnalysis() {
       case 3:
         return 'Wann möchten Sie starten?';
       case 4:
-        return 'Erzählen Sie uns von Ihrem Unternehmen';
+        return 'Erzählen Sie mir von Ihrem Unternehmen';
       case 5:
-        return 'Wie können wir Sie erreichen?';
+        return 'Wie kann ich Sie erreichen?';
       default:
         return '';
     }
