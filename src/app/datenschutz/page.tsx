@@ -102,6 +102,18 @@ export default function DatenschutzPage() {
                   href="https://vercel.com/legal/privacy-policy"
                   className="text-indigo-600 hover:text-indigo-800">https://vercel.com/legal/privacy-policy</a>
               </p>
+              <h2 className="text-xl font-semibold mb-3 mt-4">7. E-Mail Formulare</h2>
+              <p>
+                Unsere E-Mail Formulare werden über Strato abgewickelt. Strato ist ein deutscher Hosting-Anbieter.
+                Es besteht die Möglichkeit, dass personenbezogene Daten auf Servern in Deutschland verarbeitet werden.
+                Die Verarbeitung basiert auf den Standardvertragsklauseln der Europäischen Kommission gemäß Art.
+                46 DSGVO.
+              </p>
+              <p className="mt-2">
+                Mehr Informationen finden Sie in der Datenschutzerklärung von Strato: <a
+                  href="https://www.strato.de/datenschutz/"
+                  className="text-indigo-600 hover:text-indigo-800">https://www.strato.de/datenschutz/</a>
+              </p>
             </div>
           </section>
         </div>
