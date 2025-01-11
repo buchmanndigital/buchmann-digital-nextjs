@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     } = data;
 
     // Übersetze die Timeline-ID in einen lesbaren Text
-    const timelineText = {
+    const timelineText: Record<string, string> = {
       'asap': 'So schnell wie möglich',
       '1-month': 'Innerhalb eines Monats',
       '3-months': 'In den nächsten 3 Monaten',
