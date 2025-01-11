@@ -30,7 +30,7 @@ export function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Buchmann Digital</h3>
             <p className="text-gray-400">Ihr Partner für digitale Transformation</p>
-            <p className="mt-4 text-sm text-gray-500">© 2024 Florian Buchmann.<br />Alle Rechte vorbehalten.</p>
+            <p className="mt-4 text-sm text-gray-500">© {new Date().getFullYear()} Buchmann Digital<br />Alle Rechte vorbehalten</p>
           </div>
           
           <div>
