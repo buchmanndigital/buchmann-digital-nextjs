@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       '1-month': 'Innerhalb eines Monats',
       '3-months': 'In den nächsten 3 Monaten',
       'planning': 'Noch in der Planungsphase'
-    }[timeline] || timeline;
+    }[timeline as keyof typeof timelineText] || timeline;
 
     // Konvertiere die Goal-IDs in lesbare Labels und füge die benutzerdefinierten Ziele hinzu
     const mainGoalLabels = mainGoals.map(getGoalLabel);
