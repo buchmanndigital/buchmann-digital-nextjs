@@ -8,7 +8,7 @@ export default function NotFound() {
       <main className="flex-grow">
         <div className="container mx-auto px-4 py-16 text-center">
           <Link href="/">
-            <span className="text-indigo-600 hover:text-indigo-800">Zur zur Startseite</span>
+            <span className="text-indigo-600 hover:text-indigo-800">Zur Startseite</span>
           </Link>
         </div>
         <WebsiteAnalysis />
