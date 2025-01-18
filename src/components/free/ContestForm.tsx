@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
@@ -205,6 +206,13 @@ export function ContestForm() {
                     placeholder="Erzähle uns von deinem Unternehmen und warum du eine neue Website brauchst..."
                     className="h-32"
                   />
+                </div>
+
+                <div className="text-sm text-gray-600">
+                  Mit dem Absenden des Formulars akzeptierst du unsere{' '}
+                  <Link href="/free/agb" className="text-indigo-600 hover:underline">
+                    Allgemeinen Geschäftsbedingungen (AGB)
+                  </Link>.
                 </div>
 
                 <Button
