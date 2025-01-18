@@ -150,6 +150,7 @@ export function ContestForm() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Max Mustermann"
+                    className="text-base"
                   />
                 </div>
 
@@ -161,6 +162,7 @@ export function ContestForm() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="max@firma.de"
+                    className="text-base"
                   />
                 </div>
 
@@ -171,6 +173,7 @@ export function ContestForm() {
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     placeholder="Firma GmbH"
+                    className="text-base"
                   />
                 </div>
 
@@ -183,6 +186,7 @@ export function ContestForm() {
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                     placeholder="www.firma.de"
+                    className="text-base"
                   />
                 </div>
 
@@ -193,6 +197,7 @@ export function ContestForm() {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+49 123 4567890"
+                    className="text-base"
                   />
                 </div>
 
@@ -204,7 +209,7 @@ export function ContestForm() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Erzähle uns von deinem Unternehmen und warum du eine neue Website brauchst..."
-                    className="h-32"
+                    className="h-32 text-base"
                   />
                 </div>
 
