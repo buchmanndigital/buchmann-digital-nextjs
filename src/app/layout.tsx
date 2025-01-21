@@ -10,13 +10,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [consent, setConsent] = useState(false);
+  const [consent, setConsent] = useState<boolean | null>(null);
 
   useEffect(() => {
     const consentGiven = localStorage.getItem('cookiesAccepted');
+    const consentDenied = localStorage.getItem('cookiesDenied');
     if (consentGiven) {
       setConsent(true);
       loadGoogleAnalytics();
+    } else if (consentDenied) {
+      setConsent(false);
     }
   }, []);
 
@@ -24,6 +27,11 @@ export default function RootLayout({
     localStorage.setItem('cookiesAccepted', 'true');
     setConsent(true);
     loadGoogleAnalytics();
+  };
+
+  const handleDeclineCookies = () => {
+    localStorage.setItem('cookiesDenied', 'true');
+    setConsent(false);
   };
 
   const loadGoogleAnalytics = () => {
@@ -51,13 +59,20 @@ export default function RootLayout({
       <body>
         {children}
         <Analytics />
-        {!consent && (
+        {consent === null && (
           <div id="cookie-consent-banner" className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 z-50">
-            <div className="container mx-auto flex justify-between items-center">
-              <p>Wir verwenden Cookies, um unsere Website und unseren Service zu optimieren. <a href="/datenschutz" className="underline">Mehr erfahren</a></p>
-              <button onClick={handleAcceptCookies} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                Akzeptieren
-              </button>
+            <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+              <p className="text-center md:text-left">
+                Wir verwenden Cookies, um unsere Website und unseren Service zu optimieren. <a href="/datenschutz" className="underline">Mehr erfahren</a>
+              </p>
+              <div className="flex space-x-2">
+                <button onClick={handleAcceptCookies} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                  Akzeptieren
+                </button>
+                <button onClick={handleDeclineCookies} className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
+                  Ablehnen
+                </button>
+              </div>
             </div>
           </div>
         )}

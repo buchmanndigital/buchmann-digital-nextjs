@@ -53,22 +53,18 @@ export default function DatenschutzPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-3">4. Cookies</h2>
+              <h2 className="text-xl font-semibold mb-3">4. Google Tag (gtag.js)</h2>
               <p>
-                Unsere Website verwendet Cookies. Cookies sind kleine Textdateien, die auf Ihrem Endgerät
-                gespeichert werden und die Ihr Browser speichert. Sie richten keinen Schaden an.
+                Auf dieser Website wird das Google Tag (gtag.js) verwendet, ein Analysetool von Google. Dabei
+                werden keine Cookies verwendet, und die IP-Adresse wird anonymisiert. Das Tracking erfolgt
+                ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO, da ein berechtigtes Interesse an
+                der Analyse des Nutzerverhaltens besteht, um unser Angebot zu optimieren. 
               </p>
               <p className="mt-2">
-                Die meisten der von uns verwendeten Cookies sind sogenannte „Session-Cookies“. Sie werden nach
-                Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert,
-                bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch
-                wiederzuerkennen.
-              </p>
-              <p className="mt-2">
-                Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden
-                und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell
-                ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren.
-                Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+                Mehr Informationen zur Datenverarbeitung durch Google finden Sie in der Datenschutzerklärung
+                von Google: <a
+                  href="https://policies.google.com/privacy"
+                  className="text-indigo-600 hover:text-indigo-800">https://policies.google.com/privacy</a>.
               </p>
             </div>
 
