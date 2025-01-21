@@ -52,6 +52,12 @@ export function Navigation() {
           <nav className="hidden lg:flex items-center gap-8">
             <button 
               className="text-gray-600 hover:text-gray-900"
+              onClick={() => scrollToSection('personal')}
+            >
+              Über mich
+            </button>
+            <button 
+              className="text-gray-600 hover:text-gray-900"
               onClick={() => scrollToSection('process')}
             >
               Ablauf
@@ -86,6 +92,12 @@ export function Navigation() {
         {isMenuOpen && (
           <nav className="lg:hidden mt-4 pb-4">
             <div className="flex flex-col gap-4">
+              <button 
+                className="text-gray-600 hover:text-gray-900 py-2"
+                onClick={() => scrollToSection('personal')}
+              >
+                Über mich
+              </button>
               <button 
                 className="text-gray-600 hover:text-gray-900 py-2"
                 onClick={() => scrollToSection('process')}
