@@ -43,7 +43,7 @@ export function About() {
             
             <div className="absolute -bottom-4 right-4 md:-bottom-8 md:-right-8 bg-white rounded-lg p-4 shadow-xl z-20">
               <div className="text-2xl font-bold text-blue-600">10+ Jahre</div>
-              <div className="text-gray-600">Erfahrung in der Prozessautomatisierung</div>
+              <div className="text-gray-600">Erfahrung in der Digitalisierung</div>
             </div>
           </div>
 
