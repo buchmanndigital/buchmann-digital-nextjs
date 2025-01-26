@@ -68,6 +68,15 @@ export default function RootLayout({
       <head>
         <title>Websites und Software die Unternehmen voranbringen</title>
         <meta name="description" content="Professionelle Webentwicklung und Softwarelösungen für Ihr Unternehmen" />
+        {typeof window !== 'undefined' && window.location.pathname === '/digitalisierung/danke' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                gtag('event', 'ads_conversion_Termin_vereinbaren_1', {});
+              `
+            }}
+          />
+        )}
       </head>
       <body>
         {children}
