@@ -100,7 +100,7 @@ export function DigitalizationStats() {
             <span className="text-blue-300 font-medium">Messbare Ergebnisse</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Die Vorteile der Digitalisierung
+            Weitere Vorteile der Digitalisierung
           </h2>
           <p className="text-xl text-gray-300">
             Entdecken Sie, wie Prozessautomatisierung Ihr Unternehmen transformiert
