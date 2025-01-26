@@ -38,7 +38,7 @@ export function Hero() {
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 pt-32 pb-20">
+      <div className="relative z-10 container mx-auto px-4 pt-32 max-md:pt-10 pb-20">
         <div 
           ref={contentRef}
           className="max-w-4xl mx-auto text-center"
