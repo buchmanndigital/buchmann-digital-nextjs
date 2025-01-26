@@ -35,19 +35,32 @@ export default function RootLayout({
   };
 
   const loadGoogleAnalytics = () => {
-    const script1 = document.createElement('script');
-    script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-QDKWGKEYQ6';
-    script1.async = true;
-    document.head.appendChild(script1);
+    // Google Analytics Tag
+    const analyticsScript = document.createElement('script');
+    analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-QDKWGKEYQ6';
+    analyticsScript.async = true;
+    document.head.appendChild(analyticsScript);
 
-    const script2 = document.createElement('script');
-    script2.innerHTML = `
+    // Google Ads Tag
+    const adsScript = document.createElement('script');
+    adsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-10838957917';
+    adsScript.async = true;
+    document.head.appendChild(adsScript);
+
+    // Gemeinsames Setup Script
+    const setupScript = document.createElement('script');
+    setupScript.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+      
+      // Google Analytics Konfiguration
       gtag('config', 'G-QDKWGKEYQ6', { 'anonymize_ip': true, 'storage': 'none' });
+      
+      // Google Ads Konfiguration
+      gtag('config', 'AW-10838957917');
     `;
-    document.head.appendChild(script2);
+    document.head.appendChild(setupScript);
   };
 
   return (
