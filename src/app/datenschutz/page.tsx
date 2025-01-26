@@ -31,8 +31,45 @@ export default function DatenschutzPage() {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-3">3. Datenerfassung auf dieser Website</h2>
-              <h3 className="text-lg font-semibold mt-4">3.1 Server-Log-Dateien</h3>
+              <h2 className="text-xl font-semibold mb-3">3. Terminbuchung über Calendly</h2>
+              <p className="mb-2">
+                Für die Terminvereinbarung nutzen wir den Dienst Calendly. Wenn Sie einen Termin buchen,
+                werden die folgenden Daten verarbeitet:
+              </p>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>Name</li>
+                <li>E-Mail-Adresse</li>
+                <li>Gewählter Termin</li>
+                <li>Eventuelle zusätzliche Angaben, die Sie während der Buchung machen</li>
+              </ul>
+              <p className="mt-4">
+                Calendly verwendet Cookies und ähnliche Technologien für folgende Zwecke:
+              </p>
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>Technisch notwendige Cookies für die Funktionalität des Buchungssystems</li>
+                <li>Performance-Cookies zur Verbesserung des Services</li>
+                <li>Analyse-Cookies zur Optimierung des Angebots</li>
+              </ul>
+              <p className="mt-4">
+                Die Datenverarbeitung erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO)
+                sowie zur Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).
+              </p>
+              <p className="mt-2">
+                Calendly ist ein Dienst der Calendly LLC mit Sitz in den USA. Die Datenübermittlung in die
+                USA erfolgt auf Basis der EU-Standardvertragsklauseln. Weitere Informationen finden Sie in der
+                <a
+                  href="https://calendly.com/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-indigo-600 hover:text-indigo-800 ml-1"
+                >
+                  Datenschutzerklärung von Calendly
+                </a>.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold mb-3">4. Server-Log-Dateien</h2>
               <p>
                 Der Provider dieser Website erhebt und speichert automatisch Informationen in sogenannten
                 Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
@@ -45,71 +82,35 @@ export default function DatenschutzPage() {
                 <li>Uhrzeit der Serveranfrage</li>
                 <li>IP-Adresse</li>
               </ul>
-              <p className="mt-2">
-                Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Grundlage
-                der Datenverarbeitung ist Art. 6 Abs. 1 lit. f DSGVO, der die Verarbeitung von Daten zur
-                Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen gestattet.
-              </p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-3">4. Google Tag (gtag.js)</h2>
+              <h2 className="text-xl font-semibold mb-3">5. Google Tag (gtag.js)</h2>
               <p>
                 Auf dieser Website wird das Google Tag (gtag.js) verwendet, ein Analysetool von Google. Dabei
                 werden keine Cookies verwendet, und die IP-Adresse wird anonymisiert. Das Tracking erfolgt
                 ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO, da ein berechtigtes Interesse an
                 der Analyse des Nutzerverhaltens besteht, um unser Angebot zu optimieren. 
               </p>
-              <p className="mt-2">
-                Mehr Informationen zur Datenverarbeitung durch Google finden Sie in der Datenschutzerklärung
-                von Google: <a
-                  href="https://policies.google.com/privacy"
-                  className="text-indigo-600 hover:text-indigo-800">https://policies.google.com/privacy</a>.
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold mb-3">6. Ihre Rechte</h2>
+              <p>
+                Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung
+                Ihrer personenbezogenen Daten. Zudem haben Sie das Recht auf Datenübertragbarkeit und können
+                einer Verarbeitung aus berechtigten Interessen widersprechen.
               </p>
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-3">5. Ihre Rechte</h2>
-              <h3 className="text-lg font-semibold mt-4">5.1 Recht auf Auskunft</h3>
+              <h2 className="text-xl font-semibold mb-3">7. Kontakt für Datenschutzfragen</h2>
               <p>
-                Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche
-                Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den
-                Zweck der Datenverarbeitung.
+                Bei Fragen zur Erhebung, Verarbeitung oder Nutzung Ihrer personenbezogenen Daten, bei
+                Auskünften, Berichtigung, Sperrung oder Löschung von Daten wenden Sie sich bitte an:
               </p>
-
-              <h3 className="text-lg font-semibold mt-4">5.2 Recht auf Berichtigung, Sperrung und Löschung</h3>
-              <p>
-                Sie haben außerdem das Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen.
-                Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im
-                Impressum angegebenen Adresse an uns wenden.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold mb-3">6. Drittanbieter-Dienste</h2>
-              <p>
-                Diese Website wird auf Vercel gehostet. Vercel ist ein US-amerikanischer Hosting-Anbieter. Es
-                besteht die Möglichkeit, dass personenbezogene Daten auf Servern in den USA verarbeitet werden.
-                Die Verarbeitung basiert auf den Standardvertragsklauseln der Europäischen Kommission gemäß Art.
-                46 DSGVO.
-              </p>
-              <p className="mt-2">
-                Mehr Informationen finden Sie in der Datenschutzerklärung von Vercel: <a
-                  href="https://vercel.com/legal/privacy-policy"
-                  className="text-indigo-600 hover:text-indigo-800">https://vercel.com/legal/privacy-policy</a>
-              </p>
-              <h2 className="text-xl font-semibold mb-3 mt-4">7. E-Mail Formulare</h2>
-              <p>
-                Unsere E-Mail Formulare werden über Strato abgewickelt. Strato ist ein deutscher Hosting-Anbieter.
-                Es besteht die Möglichkeit, dass personenbezogene Daten auf Servern in Deutschland verarbeitet werden.
-                Die Verarbeitung basiert auf den Standardvertragsklauseln der Europäischen Kommission gemäß Art.
-                46 DSGVO.
-              </p>
-              <p className="mt-2">
-                Mehr Informationen finden Sie in der Datenschutzerklärung von Strato: <a
-                  href="https://www.strato.de/datenschutz/"
-                  className="text-indigo-600 hover:text-indigo-800">https://www.strato.de/datenschutz/</a>
-              </p>
+              <p className="mt-2">Florian Buchmann</p>
+              <p>E-Mail: info@buchmann.digital</p>
             </div>
           </section>
         </div>

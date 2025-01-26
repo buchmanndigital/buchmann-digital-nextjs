@@ -40,6 +40,11 @@
   transform: translateY(100px);
 }
 
+.break-word {
+  word-break: break-word;
+  hyphens: auto;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
