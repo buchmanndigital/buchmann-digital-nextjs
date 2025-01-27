@@ -12,6 +12,7 @@ import { Footer } from '@/components/Footer';
 import { AutomationShowcase } from '@/components/digitalization/AutomationShowcase';
 import { ROICalculator } from '@/components/digitalization/ROICalculator';
 import { DigitalizationStats } from '@/components/digitalization/DigitalizationStats';
+import { WorkforceSection } from '@/components/digitalization/WorkforceSection';
 
 export default function DigitalizationPage() {
   return (
@@ -23,6 +24,7 @@ export default function DigitalizationPage() {
         <Benefits />
         <AutomationShowcase />
         <Process />
+        <WorkforceSection />
         <ROICalculator />
         <DigitalizationStats />
         {/* <Testimonials /> */}
