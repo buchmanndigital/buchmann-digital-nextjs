@@ -13,6 +13,7 @@ import { AutomationShowcase } from '@/components/digitalization/AutomationShowca
 import { ROICalculator } from '@/components/digitalization/ROICalculator';
 import { DigitalizationStats } from '@/components/digitalization/DigitalizationStats';
 import { WorkforceSection } from '@/components/digitalization/WorkforceSection';
+import { CostComparison } from '@/components/digitalization/CostComparison';
 
 export default function DigitalizationPage() {
   return (
@@ -26,6 +27,7 @@ export default function DigitalizationPage() {
         <Process />
         <WorkforceSection />
         <ROICalculator />
+        <CostComparison />
         <DigitalizationStats />
         {/* <Testimonials /> */}
         <FAQ />
