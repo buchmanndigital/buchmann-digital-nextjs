@@ -35,7 +35,7 @@ export function AgencyPartner() {
               </h2>
 
               <p className="text-lg text-gray-600">
-                Konzentrieren Sie sich auf Akquise, Design und Kundenbetreuung – 
+                Konzentrieren Sie sich auf Akquise und Kundenbetreuung – 
                 ich übernehme die komplette technische Implementierung Ihrer Projekte.
               </p>
 
