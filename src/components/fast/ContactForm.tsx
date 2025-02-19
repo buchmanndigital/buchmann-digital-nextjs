@@ -119,7 +119,7 @@ export function ContactForm() {
                 Lassen Sie uns Ihre Projekte besprechen
               </h2>
               <p className="text-xl text-gray-600 mb-12">
-                Erfahren Sie, wie ich Ihre Agentur bei der effizienten Umsetzung von Kundenprojekten unterstützen können.
+                Erfahren Sie, wie ich Ihre Agentur bei der effizienten Umsetzung von Kundenprojekten unterstützen kann.
               </p>
               
               <div className="space-y-6">
