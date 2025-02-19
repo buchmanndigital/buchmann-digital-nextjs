@@ -47,7 +47,7 @@ export function AgencyPartner() {
                   <div>
                     <h3 className="text-[#1D2433] font-semibold mb-1">Schnelle Umsetzung</h3>
                     <p className="text-gray-600">
-                      Fertige Websites in 3-5 Tagen statt mehreren Wochen
+                      Fertige Websites in 1-5 Tagen statt mehreren Wochen
                     </p>
                   </div>
                 </div>
