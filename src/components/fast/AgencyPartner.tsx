@@ -93,7 +93,7 @@ export function AgencyPartner() {
                       </li>
                       <li className="flex items-start gap-3 text-gray-600">
                         <span className="w-6 h-6 rounded-full bg-[#1D2433]/5 flex items-center justify-center flex-shrink-0 text-[#1D2433] text-sm">2</span>
-                        <span>Ich entwickle die Website in 3-5 Tagen</span>
+                        <span>Ich entwickle die Website in 1-5 Tagen</span>
                       </li>
                       <li className="flex items-start gap-3 text-gray-600">
                         <span className="w-6 h-6 rounded-full bg-[#1D2433]/5 flex items-center justify-center flex-shrink-0 text-[#1D2433] text-sm">3</span>
