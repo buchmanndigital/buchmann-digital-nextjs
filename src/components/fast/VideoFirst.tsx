@@ -145,6 +145,9 @@ const VideoFirst: React.FC = () => {
             autoPlay
             muted
             loop
+            playsInline
+            // Alternativ für ältere iOS-Versionen:
+            // webkit-playsinline
             width="100%"
             className="w-full"
           >
