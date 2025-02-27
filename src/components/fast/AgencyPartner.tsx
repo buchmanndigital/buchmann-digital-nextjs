@@ -13,7 +13,7 @@ export function AgencyPartner() {
   };
 
   return (
-    <section id="process" className="py-20 bg-gray-50 mt-20">
+    <section id="process" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

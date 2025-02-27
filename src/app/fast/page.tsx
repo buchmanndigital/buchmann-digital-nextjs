@@ -8,6 +8,7 @@ import { AgencyPartner } from '@/components/fast/AgencyPartner';
 import { QuickDevelopment } from '@/components/fast/QuickDevelopment';
 import { TryWithUs } from '@/components/fast/TryWithUs';
 import { ContactForm } from '@/components/fast/ContactForm';
+import VideoFirst from '@/components/fast/VideoFirst';
 
 export default function FastPage() {
   return (
@@ -17,6 +18,7 @@ export default function FastPage() {
         <Hero />
         <Stats />
         <Features />
+        <VideoFirst />
         <AgencyPartner />
         <QuickDevelopment />
         <TryWithUs />
