@@ -96,7 +96,7 @@ const projects: Project[] = [
     id: 9,
     title: "App",
     subtitle: "TalkSum",
-    url: "",
+    url: "https://apps.apple.com/de/app/talksum/id6742714916",
     status: "abgeschlossen",
     filled: true
   },
