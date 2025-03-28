@@ -1,5 +1,5 @@
 import { Header } from '@/components/Header';
-import { Hero } from '@/components/home/Hero'; // Pfad angepasst
+import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Services } from '@/components/Services';
 import { FAQ } from '@/components/FAQ';
@@ -14,9 +14,20 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <Header />
       <main>
-       <Hero /> 
+        <Hero />
+        <About />
+        <div className="container mx-auto px-4">
+          <Services />
+        </div>
+        <Features />
+        <WebsiteAnalysis />
+        <div className="container mx-auto px-4 mb-10">
+          <FAQ />
+          <CTA />
+        </div>
+        <ContactForm />
       </main>
-     
+      <Footer />
     </div>
   );
 }
