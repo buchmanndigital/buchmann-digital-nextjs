@@ -13,30 +13,40 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-    const { name, email, subject, message } = data;
+    const { name, email, subject, message } = await request.json();
 
+    // Validierung
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { error: 'Name, E-Mail und Nachricht sind erforderlich' },
+        { status: 400 }
+      );
+    }
+
+    const emailSubject = subject || 'Neue Kontaktanfrage von der Website';
+
+    // E-Mail senden
     await transporter.sendMail({
       from: process.env.STRATO_EMAIL_USER,
       to: process.env.STRATO_EMAIL_USER,
-      subject: 'Neue Kontaktanfrage',
+      subject: emailSubject,
       html: `
         <h2>Neue Kontaktanfrage</h2>
+        
+        <h3>Kontaktdaten</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>E-Mail:</strong> ${email}</p>
-        <p><strong>Betreff:</strong> ${subject}</p>
-        <p><strong>Nachricht:</strong> ${message}</p>
+        
+        <h3>Nachricht</h3>
+        <p>${message}</p>
       `,
     });
 
-    return NextResponse.json(
-      { message: 'E-Mail wurde erfolgreich versendet' },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Email error:', error);
+    console.error('Fehler beim Senden der E-Mail:', error);
     return NextResponse.json(
-      { error: 'Fehler beim Versenden der E-Mail' },
+      { error: 'Fehler beim Senden der Nachricht' },
       { status: 500 }
     );
   }
