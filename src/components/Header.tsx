@@ -52,33 +52,21 @@ export function Header() {
           <nav className="hidden lg:flex items-center gap-8">
             <button 
               className="text-gray-600 hover:text-gray-900"
-              onClick={() => scrollToSection('about')}
+              onClick={() => scrollToSection('bewertungen')}
             >
-              Über mich
+              Bewertungen
             </button>
             <button 
               className="text-gray-600 hover:text-gray-900"
-              onClick={() => scrollToSection('services')}
+              onClick={() => scrollToSection('roadmap')}
             >
-              Leistungen
-            </button>
-            <button 
-              className="text-gray-600 hover:text-gray-900"
-              onClick={() => scrollToSection('faq')}
-            >
-              FAQ
-            </button>
-            <button 
-              className="text-gray-600 hover:text-gray-900"
-              onClick={() => scrollToSection('contact')}
-            >
-              Kontakt
+              Dein Weg
             </button>
             <Button 
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-6"
-              onClick={() => scrollToSection('contact')}
+              onClick={() => scrollToSection('kontakt')}
             >
-              Jetzt anfragen
+              Kostenloses Erstgespräch
             </Button>
           </nav>
         </div>
@@ -97,33 +85,21 @@ export function Header() {
               </button>
               <button 
                 className="text-gray-600 hover:text-gray-900 py-2"
-                onClick={() => scrollToSection('about')}
+                onClick={() => scrollToSection('bewertungen')}
               >
-                Über mich
+                Bewertungen
               </button>
               <button 
                 className="text-gray-600 hover:text-gray-900 py-2"
-                onClick={() => scrollToSection('services')}
+                onClick={() => scrollToSection('roadmap')}
               >
-                Leistungen
-              </button>
-              <button 
-                className="text-gray-600 hover:text-gray-900 py-2"
-                onClick={() => scrollToSection('faq')}
-              >
-                FAQ
-              </button>
-              <button 
-                className="text-gray-600 hover:text-gray-900 py-2"
-                onClick={() => scrollToSection('contact')}
-              >
-                Kontakt
+                Dein Weg
               </button>
               <Button 
                 className="bg-indigo-600 hover:bg-indigo-700 text-white w-full"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection('kontakt')}
               >
-                Jetzt anfragen
+                Kostenloses Erstgespräch
               </Button>
             </div>
           </nav>

@@ -83,7 +83,7 @@ export function RoadmapSection() {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden" id="roadmap">
       {/* SVG-Linie über den gesamten Bildschirm - nur für Desktop */}
       <div className="absolute w-full h-full overflow-hidden hidden md:block">
         <div className="absolute w-[300vw] h-[300px] top-[49%] -translate-y-1/2 left-[-10vw] right-0">
