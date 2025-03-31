@@ -113,6 +113,7 @@ export function FreeAnalysis() {
     setStatus('sending');
     
     try {
+      const isEmail = contactInfo.includes('@');
       const res = await fetch('/api/free-analysis', {
         method: 'POST',
         headers: {
@@ -120,8 +121,8 @@ export function FreeAnalysis() {
         },
         body: JSON.stringify({
           name: contactName,
-          email: contactInfo,
-          phone: contactInfo.includes('@') ? '' : contactInfo,
+          email: isEmail ? contactInfo : '',
+          phone: isEmail ? '' : contactInfo,
           company: companyName,
           website: hasWebsite === 'yes' ? websiteUrl : '',
           industry: '', // Wird in der API nicht verwendet
