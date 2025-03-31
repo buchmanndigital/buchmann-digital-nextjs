@@ -298,7 +298,7 @@ export function FreeAnalysis() {
                     id="company"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 text-base"
                     placeholder="Dein Unternehmen GmbH"
                     required
                   />
@@ -317,7 +317,7 @@ export function FreeAnalysis() {
                     id="address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 text-base"
                     placeholder="Musterstraße 123, 12345 Musterstadt"
                   />
                 </div>
@@ -397,7 +397,7 @@ export function FreeAnalysis() {
                       id="website-url"
                       value={websiteUrl}
                       onChange={(e) => setWebsiteUrl(e.target.value)}
-                      className="pl-10"
+                      className="pl-10 text-base"
                       placeholder="https://www.example.com"
                     />
                   </div>
@@ -422,7 +422,7 @@ export function FreeAnalysis() {
                     id="contact-name"
                     value={contactName}
                     onChange={(e) => setContactName(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 text-base"
                     placeholder="Max Mustermann"
                   />
                 </div>
@@ -440,7 +440,7 @@ export function FreeAnalysis() {
                     id="contact-info"
                     value={contactInfo}
                     onChange={(e) => setContactInfo(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 text-base"
                     placeholder="info@example.com oder 01234 567890"
                     required
                   />

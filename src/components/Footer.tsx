@@ -111,7 +111,7 @@ export function Footer() {
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
                   placeholder="Max Mustermann"
                   required
                 />
@@ -126,7 +126,7 @@ export function Footer() {
                   type="email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
                   placeholder="max@example.com"
                   required
                 />
@@ -141,7 +141,7 @@ export function Footer() {
                     id="company"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
                     placeholder="Dein Unternehmen"
                   />
                 </motion.div>
@@ -155,7 +155,7 @@ export function Footer() {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
                     placeholder="+49 123 456789"
                   />
                 </motion.div>
@@ -169,7 +169,7 @@ export function Footer() {
                   id="message"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 min-h-[150px]"
+                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 min-h-[150px] text-base"
                   placeholder="Erzähle mir von deinem Projekt..."
                   required
                 />
