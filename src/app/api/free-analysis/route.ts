@@ -13,12 +13,22 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
   try {
-    const { name, email, phone, message, company } = await request.json();
+    const { 
+      name, 
+      email, 
+      phone, 
+      company, 
+      website, 
+      industry, 
+      goals, 
+      budget,
+      message 
+    } = await request.json();
 
-    // Validierung
-    if (!name || !email || !message) {
+    // Validierung der Pflichtfelder
+    if (!name || !email || !phone || !company || !website || !industry || !goals || !budget) {
       return NextResponse.json(
-        { error: 'Name, E-Mail und Nachricht sind erforderlich' },
+        { error: 'Bitte füllen Sie alle Pflichtfelder aus' },
         { status: 400 }
       );
     }
@@ -27,18 +37,26 @@ export async function POST(request: Request) {
     await transporter.sendMail({
       from: process.env.STRATO_EMAIL_USER,
       to: process.env.STRATO_EMAIL_USER,
-      subject: 'Neue Kontaktanfrage von der Website',
+      subject: 'Neue kostenlose Analyse-Anfrage',
       html: `
-        <h2>Neue Kontaktanfrage</h2>
+        <h2>Neue kostenlose Analyse-Anfrage</h2>
         
         <h3>Kontaktdaten</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>E-Mail:</strong> ${email}</p>
-        ${phone ? `<p><strong>Telefon:</strong> ${phone}</p>` : ''}
-        ${company ? `<p><strong>Unternehmen:</strong> ${company}</p>` : ''}
+        <p><strong>Telefon:</strong> ${phone}</p>
+        <p><strong>Unternehmen:</strong> ${company}</p>
+        <p><strong>Website:</strong> ${website}</p>
+        <p><strong>Branche:</strong> ${industry}</p>
+        <p><strong>Budget:</strong> ${budget}</p>
         
-        <h3>Nachricht</h3>
-        <p>${message}</p>
+        <h3>Ziele</h3>
+        <p>${goals}</p>
+        
+        ${message ? `
+          <h3>Zusätzliche Nachricht</h3>
+          <p>${message}</p>
+        ` : ''}
       `,
     });
 
@@ -50,4 +68,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-}
+} 

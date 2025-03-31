@@ -113,7 +113,7 @@ export function FreeAnalysis() {
     setStatus('sending');
     
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/api/free-analysis', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,13 +121,13 @@ export function FreeAnalysis() {
         body: JSON.stringify({
           name: contactName,
           email: contactInfo,
-          subject: 'Anfrage: Kostenlose Unternehmensanalyse',
-          message: `Unternehmensname: ${companyName}
-Adresse: ${address}
-Ansprechpartner: ${contactName}
-Kontakt: ${contactInfo}
-Hat Website: ${hasWebsite === 'yes' ? 'Ja' : 'Nein'}
-${hasWebsite === 'yes' ? `Website URL: ${websiteUrl}` : ''}`
+          phone: contactInfo.includes('@') ? '' : contactInfo,
+          company: companyName,
+          website: hasWebsite === 'yes' ? websiteUrl : '',
+          industry: '', // Wird in der API nicht verwendet
+          goals: 'Kostenlose Unternehmensanalyse',
+          budget: 'Noch nicht festgelegt',
+          message: `Adresse: ${address}`
         }),
       });
       
