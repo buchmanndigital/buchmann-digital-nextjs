@@ -187,7 +187,7 @@ export function FreeAnalysis() {
   
   // Hilfsfunktion zum Rendern der Navigationstasten
   const renderNavButtons = () => {
-    return (
+  return (
       <div className="flex justify-between mt-8">
         {currentStep !== 'intro' && currentStep !== 'success' && (
           <motion.button
@@ -235,7 +235,7 @@ export function FreeAnalysis() {
   const renderStep = () => {
     return (
       <AnimatePresence custom={direction} mode="wait">
-        <motion.div
+        <motion.div 
           key={currentStep}
           custom={direction}
           variants={pageVariants}
@@ -275,18 +275,18 @@ export function FreeAnalysis() {
                     <ArrowRight className="w-4 h-4 ml-1 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </motion.button>
                 </div>
-              </motion.div>
+        </motion.div>
             </div>
           )}
-          
+        
           {currentStep === 'company' && (
             <div className="space-y-6">
-              <motion.div 
+          <motion.div
                 custom={0} 
                 variants={itemVariants}
-                initial="hidden"
+            initial="hidden"
                 animate="visible"
-              >
+          >
                 <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
                   Unternehmensname*
                 </label>
@@ -547,7 +547,7 @@ export function FreeAnalysis() {
             {currentStep !== 'intro' && (
               <div className="mb-8">
                 <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                  <motion.div 
+                <motion.div
                     className="h-full bg-gradient-to-r from-indigo-600 to-purple-600"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}

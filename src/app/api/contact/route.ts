@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { sendLeadEvent } from '@/lib/facebook';
 
 const transporter = nodemailer.createTransport({
   host: process.env.STRATO_EMAIL_HOST,
@@ -13,15 +14,27 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
   try {
-    const { name, email, phone, message, company } = await request.json();
+    const { firstName, lastName, email, phone, company, message } = await request.json();
+    const userAgent = request.headers.get('user-agent') || '';
+    const referer = request.headers.get('referer') || '';
 
     // Validierung
-    if (!name || !email || !message) {
+    if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
-        { error: 'Name, E-Mail und Nachricht sind erforderlich' },
+        { error: 'Vorname, Nachname, E-Mail und Nachricht sind erforderlich' },
         { status: 400 }
       );
     }
+
+    // Send Facebook event
+    await sendLeadEvent({
+      email,
+      firstName,
+      lastName,
+      userAgent,
+      sourceUrl: referer,
+      isTestEvent: process.env.NODE_ENV === 'development'
+    });
 
     // E-Mail senden
     await transporter.sendMail({
@@ -32,7 +45,7 @@ export async function POST(request: Request) {
         <h2>Neue Kontaktanfrage</h2>
         
         <h3>Kontaktdaten</h3>
-        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>E-Mail:</strong> ${email}</p>
         ${phone ? `<p><strong>Telefon:</strong> ${phone}</p>` : ''}
         ${company ? `<p><strong>Unternehmen:</strong> ${company}</p>` : ''}

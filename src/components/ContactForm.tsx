@@ -9,7 +9,8 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 export function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
+  const [phone, setPhone] = useState('');
+  const [company, setCompany] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
 
@@ -28,20 +29,20 @@ export function ContactForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email, subject, message }),
+      body: JSON.stringify({ name, email, phone, company, message }),
     });
 
     if (res.ok) {
       setStatus('Nachricht gesendet!');
       setName('');
       setEmail('');
-      setSubject('');
+      setPhone('');
+      setCompany('');
       setMessage('');
     } else {
       setStatus('Fehler beim Senden der Nachricht.');
     }
   };
-  
 
   return (
     <section className="w-full bg-gray-900 py-20" id="contact">
@@ -104,7 +105,7 @@ export function ContactForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-2">
-                      Name
+                      Name*
                     </label>
                     <Input
                       id="name"
@@ -117,7 +118,7 @@ export function ContactForm() {
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-2">
-                      Email
+                      Email*
                     </label>
                     <Input
                       id="email"
@@ -130,23 +131,38 @@ export function ContactForm() {
                     />
                   </div>
                 </div>
-                
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-400 mb-2">
-                    Betreff
-                  </label>
-                  <Input
-                    id="subject"
-                    placeholder="Wie kann ich Ihnen helfen?"
-                    className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                  />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-400 mb-2">
+                      Telefon
+                    </label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+49 123 456789"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-400 mb-2">
+                      Unternehmen
+                    </label>
+                    <Input
+                      id="company"
+                      placeholder="Ihre Firma"
+                      className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
-                    Nachricht
+                    Nachricht*
                   </label>
                   <Textarea
                     id="message"
@@ -154,6 +170,7 @@ export function ContactForm() {
                     className="h-32 bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 text-base md:text-lg"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    required
                   />
                 </div>
 

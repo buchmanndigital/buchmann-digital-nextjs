@@ -45,7 +45,8 @@ const buttonVariants = {
 
 export function Footer() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     company: '',
     phone: '',
@@ -64,15 +65,12 @@ export function Footer() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          subject: 'Neue Kontaktanfrage'
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (res.ok) {
         setStatus('success');
-        setFormData({ name: '', email: '', company: '', phone: '', message: '' });
+        setFormData({ firstName: '', lastName: '', email: '', company: '', phone: '', message: '' });
       } else {
         setStatus('error');
       }
@@ -103,19 +101,35 @@ export function Footer() {
             </motion.div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <motion.div variants={itemVariants} custom={1}>
-                <label htmlFor="name" className="block text-sm font-medium text-indigo-200 mb-2">
-                  Name
-                </label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
-                  placeholder="Max Mustermann"
-                  required
-                />
-              </motion.div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <motion.div variants={itemVariants} custom={1}>
+                  <label htmlFor="firstName" className="block text-sm font-medium text-indigo-200 mb-2">
+                    Vorname
+                  </label>
+                  <Input
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
+                    placeholder="Max"
+                    required
+                  />
+                </motion.div>
+
+                <motion.div variants={itemVariants} custom={1}>
+                  <label htmlFor="lastName" className="block text-sm font-medium text-indigo-200 mb-2">
+                    Nachname
+                  </label>
+                  <Input
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    className="bg-indigo-800/80 border-indigo-600 text-white placeholder:text-indigo-300/70 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-base"
+                    placeholder="Mustermann"
+                    required
+                  />
+                </motion.div>
+              </div>
 
               <motion.div variants={itemVariants} custom={2}>
                 <label htmlFor="email" className="block text-sm font-medium text-indigo-200 mb-2">
