@@ -67,8 +67,20 @@ export default function RootLayout({
   return (
     <html lang="de" className="scroll-smooth">
       <head>
-        <title>Websites und Software die Unternehmen voranbringen</title>
-        <meta name="description" content="Professionelle Webentwicklung und Softwarelösungen für Ihr Unternehmen" />
+        <title>Buchmann Digital | Webentwicklung für Handwerker und regionale Dienstleister</title>
+        <meta name="description" content="Webseiten & SEO für Handwerker und regionale Dienstleister. Mehr Kundenanfragen durch bessere Sichtbarkeit in Ihrer Region. Jetzt unverbindlich beraten lassen!" />
+        <meta name="keywords" content="Webentwicklung, Webseite für Handwerker, SEO, Digitalisierung, Kundenakquise, Kundengewinnung, regionale Sichtbarkeit" />
+        <link rel="canonical" href="https://buchmann.digital" />
+        <meta property="og:title" content="Buchmann Digital | Webentwicklung für Handwerker und regionale Dienstleister" />
+        <meta property="og:description" content="Webseiten & SEO für Handwerker und regionale Dienstleister. Mehr Kundenanfragen durch bessere Sichtbarkeit in Ihrer Region." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://buchmann.digital" />
+        <meta property="og:site_name" content="Buchmann Digital" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Buchmann Digital | Webentwicklung für Handwerker" />
+        <meta name="twitter:description" content="Webseiten & SEO für Handwerker und regionale Dienstleister. Mehr Kundenanfragen durch bessere Sichtbarkeit in Ihrer Region." />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {consent && (
           <>
             <Script id="facebook-pixel">

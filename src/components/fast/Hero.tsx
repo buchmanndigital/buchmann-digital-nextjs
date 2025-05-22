@@ -216,7 +216,7 @@ export function Hero() {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-            <span className="block">Webprojekte für Ihre Kunden</span>
+            <span className="block">Webprojekte für Ihre Kunden </span>
             <span className="block">in wenigen Tagen statt Wochen</span>
           </h1>
 
