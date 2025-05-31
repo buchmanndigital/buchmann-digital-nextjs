@@ -57,6 +57,7 @@ const serviceNames: Record<string, string> = {
   'website': 'Professionelle Website',
   'webshop': 'Online-Shop',
   'webapp': 'Web-Anwendung',
+  'app': 'APP Entwicklung',
   'seo': 'Suchmaschinenoptimierung (SEO)',
   'ads': 'Google Ads / Online-Werbung',
   'social_media': 'Social Media Marketing',
