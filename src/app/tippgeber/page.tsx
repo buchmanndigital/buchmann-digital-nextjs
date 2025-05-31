@@ -9,24 +9,56 @@ import Link from 'next/link';
 
 export default function TippgeberPage() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [activeTab, setActiveTab] = useState<'recommend' | 'signup'>('recommend');
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       
       <main className="container mx-auto px-4 pt-24 pb-16">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Tippgeber-Programm
             </h1>
             <p className="text-xl text-gray-600">
-              Empfehlen Sie uns weiter und helfen Sie anderen Unternehmen dabei, 
-              ihre digitale Präsenz zu verbessern.
+              Empfehlen Sie uns weiter und profitieren Sie von unserem Partnerprogramm.
             </p>
           </div>
 
-          <ReferralForm onSuccess={() => setShowSuccessMessage(true)} />
+          {/* Tab Navigation */}
+          <div className="flex justify-center mb-8">
+            <div className="bg-white rounded-lg p-1 shadow-sm">
+              <button
+                onClick={() => setActiveTab('recommend')}
+                className={`px-6 py-3 rounded-md transition-colors ${
+                  activeTab === 'recommend'
+                    ? 'bg-indigo-600 text-white'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Jemanden empfehlen
+              </button>
+              <button
+                onClick={() => setActiveTab('signup')}
+                className={`px-6 py-3 rounded-md transition-colors ${
+                  activeTab === 'signup'
+                    ? 'bg-indigo-600 text-white'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Als Tippgeber anmelden
+              </button>
+            </div>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            {activeTab === 'recommend' ? (
+              <ReferralForm onSuccess={() => setShowSuccessMessage(true)} />
+            ) : (
+              <TippgeberSignupForm />
+            )}
+          </div>
 
           {showSuccessMessage && (
             <SuccessMessage onClose={() => setShowSuccessMessage(false)} />
@@ -185,6 +217,176 @@ function ReferralForm({ onSuccess }: { onSuccess: () => void }) {
         >
           {isSubmitting ? 'Wird gesendet...' : 'Empfehlung abschicken'}
         </button>
+      </form>
+    </div>
+  );
+}
+
+function TippgeberSignupForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [referralLink, setReferralLink] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name ist erforderlich';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'E-Mail ist erforderlich';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setStatus('idle');
+    
+    try {
+      const res = await fetch('/api/tippgeber-signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus('success');
+        setReferralLink(data.referralLink);
+        setFormData({ name: '', email: '' });
+        setErrors({});
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Fehler bei der Anmeldung:', error);
+      setStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="bg-white rounded-lg shadow-sm p-8 text-center">
+        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+          Willkommen im Tippgeber-Programm!
+        </h3>
+        <p className="text-gray-600 mb-6">
+          Ihre Anmeldung war erfolgreich. Sie erhalten in Kürze eine E-Mail mit allen weiteren Informationen.
+        </p>
+        
+        <div className="bg-gray-50 p-4 rounded-lg mb-6">
+          <h4 className="font-medium text-gray-900 mb-2">Ihr persönlicher Empfehlungslink:</h4>
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={referralLink}
+              readOnly
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-md bg-white text-sm"
+            />
+            <button
+              onClick={() => navigator.clipboard.writeText(referralLink)}
+              className="px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors text-sm"
+            >
+              Kopieren
+            </button>
+          </div>
+        </div>
+        
+        <button
+          onClick={() => setStatus('idle')}
+          className="text-indigo-600 hover:text-indigo-700 transition-colors"
+        >
+          Weitere Anmeldung
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm p-8">
+      <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+        Als Tippgeber anmelden
+      </h2>
+      <p className="text-gray-600 mb-6">
+        Melden Sie sich als Tippgeber an und erhalten Sie einen persönlichen Empfehlungslink. 
+        Für jeden erfolgreichen Kontakt über Ihren Link erhalten Sie eine Provision.
+      </p>
+      
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label htmlFor="signup-name" className="block text-sm font-medium text-gray-700 mb-2">
+            Ihr Name *
+          </label>
+          <input
+            type="text"
+            id="signup-name"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className={`w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${
+              errors.name ? 'border-red-500' : 'border-gray-300'
+            }`}
+            placeholder="Max Mustermann"
+          />
+          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="signup-email" className="block text-sm font-medium text-gray-700 mb-2">
+            Ihre E-Mail *
+          </label>
+          <input
+            type="email"
+            id="signup-email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className={`w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 ${
+              errors.email ? 'border-red-500' : 'border-gray-300'
+            }`}
+            placeholder="max@beispiel.de"
+          />
+          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-medium py-3 px-4 rounded-lg transition-colors"
+        >
+          {isSubmitting ? 'Wird verarbeitet...' : 'Jetzt als Tippgeber anmelden'}
+        </button>
+
+        {status === 'error' && (
+          <p className="text-sm text-red-600 text-center">
+            Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.
+          </p>
+        )}
       </form>
     </div>
   );
