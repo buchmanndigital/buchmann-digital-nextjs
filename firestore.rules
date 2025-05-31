@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Regeln für die "users"-Collection
+    match /users/{userId} {
+      // Nur der authentifizierte Nutzer kann sein eigenes Dokument lesen
+      allow read: if request.auth != null && request.auth.uid == userId;
+      
+      // Nur der authentifizierte Nutzer kann sein eigenes Dokument schreiben/updaten
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Regeln für die "referrals"-Collection
+    match /referrals/{referralId} {
+      // Jeder (auch nicht authentifizierte Nutzer) darf neue Empfehlungen erstellen
+      allow create: if true;
+
+      // Nur authentifizierte Admins dürfen Empfehlungen lesen
+      // Admin-Status wird aus der users Collection geprüft
+      allow read: if request.auth != null 
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+      
+      // Keine Updates oder Löschungen erlaubt
+      allow update, delete: if false;
+    }
+
+    // Alle anderen Collections sind standardmäßig geschützt
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+} 
