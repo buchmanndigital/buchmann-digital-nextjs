@@ -40,24 +40,42 @@ export default function ReferralPage() {
   useEffect(() => {
     const trackVisit = async () => {
       try {
+        console.log('🔍 Visit tracking started for code:', code);
+        
         // Prüfe localStorage ob dieser Referral-Code bereits besucht wurde
         const visitedReferrals = JSON.parse(localStorage.getItem('visitedReferrals') || '{}');
         const now = new Date().getTime();
         const twentyFourHours = 24 * 60 * 60 * 1000; // 24 Stunden in Millisekunden
         
+        console.log('📱 Current visitedReferrals:', visitedReferrals);
+        
         // Prüfe ob bereits ein Visit für diesen Code gespeichert ist
         const lastVisit = visitedReferrals[code];
         
+        console.log('⏰ Last visit for code', code, ':', lastVisit);
+        console.log('⏰ Time since last visit:', lastVisit ? (now - lastVisit) : 'never');
+        
         // Wenn kein Visit vorhanden oder länger als 24 Stunden her
         if (!lastVisit || (now - lastVisit) > twentyFourHours) {
+          console.log('✅ Tracking visit - conditions met');
+          
           // Track page visit
-          await fetch('/api/referral-visit', {
+          const response = await fetch('/api/referral-visit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
               referralCode: code
             })
           });
+          
+          console.log('📡 Visit API response status:', response.status);
+          
+          if (response.ok) {
+            console.log('✅ Visit tracked successfully');
+          } else {
+            const errorText = await response.text();
+            console.error('❌ Visit tracking failed:', errorText);
+          }
           
           // Speichere den aktuellen Zeitstempel im localStorage
           visitedReferrals[code] = now;
@@ -71,9 +89,12 @@ export default function ReferralPage() {
           });
           
           localStorage.setItem('visitedReferrals', JSON.stringify(visitedReferrals));
+          console.log('💾 Updated localStorage:', visitedReferrals);
+        } else {
+          console.log('⏭️ Skipping visit tracking - already tracked within 24h');
         }
       } catch (error) {
-        console.error('Error tracking visit:', error);
+        console.error('❌ Error tracking visit:', error);
       }
     };
 
