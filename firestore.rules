@@ -15,8 +15,8 @@ service cloud.firestore {
       // Jeder kann neue Referrer erstellen (Anmeldung als Tippgeber)
       allow create: if true;
       
-      // Nur Admins können Referrer lesen
-      allow read: if request.auth != null 
+      // Nur Admins können Referrer lesen, updaten und löschen
+      allow read, update, delete: if request.auth != null 
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
     }
@@ -26,8 +26,8 @@ service cloud.firestore {
       // Jeder (auch nicht authentifizierte Nutzer) darf neue Empfehlungen erstellen
       allow create: if true;
 
-      // Nur authentifizierte Admins dürfen Empfehlungen lesen
-      allow read: if request.auth != null 
+      // Nur authentifizierte Admins dürfen Empfehlungen lesen und löschen
+      allow read, delete: if request.auth != null 
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
     }
@@ -37,8 +37,8 @@ service cloud.firestore {
       // Jeder kann neue Kontaktanfragen erstellen
       allow create: if true;
       
-      // Nur Admins können Kontaktanfragen lesen
-      allow read: if request.auth != null 
+      // Nur Admins können Kontaktanfragen lesen und löschen
+      allow read, delete: if request.auth != null 
         && exists(/databases/$(database)/documents/users/$(request.auth.uid))
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
     }

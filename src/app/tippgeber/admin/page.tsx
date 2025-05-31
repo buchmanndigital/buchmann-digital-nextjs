@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy, Timestamp, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, Timestamp, doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from 'firebase/auth';
 import { db, auth } from '@/lib/firebase';
 import { Header } from '@/components/Header';
@@ -46,6 +46,13 @@ interface Referrer {
   createdAt: Timestamp;
 }
 
+interface DeleteConfirmation {
+  isOpen: boolean;
+  type: 'referrer' | 'contact' | null;
+  item: any;
+  step: 1 | 2;
+}
+
 const serviceNames: Record<string, string> = {
   'website': 'Professionelle Website',
   'webshop': 'Online-Shop',
@@ -78,6 +85,12 @@ export default function TippgeberAdminPage() {
   const [referrers, setReferrers] = useState<Referrer[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [activeTab, setActiveTab] = useState<'referrers' | 'contacts' | 'referrals'>('referrers');
+  const [deleteConfirmation, setDeleteConfirmation] = useState<DeleteConfirmation>({
+    isOpen: false,
+    type: null,
+    item: null,
+    step: 1
+  });
 
   // Funktion zum Prüfen des Admin-Status
   const checkAdminStatus = async (userId: string) => {
@@ -165,6 +178,24 @@ export default function TippgeberAdminPage() {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      if (deleteConfirmation.type === 'referrer') {
+        // Lösche direkt im Frontend mit Auth
+        await deleteDoc(doc(db, 'referrers', deleteConfirmation.item.id));
+        setReferrers(prev => prev.filter(r => r.id !== deleteConfirmation.item.id));
+      } else if (deleteConfirmation.type === 'contact') {
+        // Lösche direkt im Frontend mit Auth
+        await deleteDoc(doc(db, 'referral_contacts', deleteConfirmation.item.id));
+        setReferralContacts(prev => prev.filter(c => c.id !== deleteConfirmation.item.id));
+      }
+      
+      setDeleteConfirmation({ isOpen: false, type: null, item: null, step: 1 });
+    } catch (error) {
+      console.error('Fehler beim Löschen:', error);
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -220,6 +251,18 @@ export default function TippgeberAdminPage() {
                 setActiveTab={setActiveTab}
                 onLogout={handleLogout}
                 onRefresh={loadAllData}
+                onDeleteReferrer={(referrer) => setDeleteConfirmation({ 
+                  isOpen: true, 
+                  type: 'referrer', 
+                  item: referrer, 
+                  step: 1 
+                })}
+                onDeleteContact={(contact) => setDeleteConfirmation({ 
+                  isOpen: true, 
+                  type: 'contact', 
+                  item: contact, 
+                  step: 1 
+                })}
               />
             ) : (
               <div className="bg-white rounded-lg shadow-sm p-8 text-center">
@@ -238,8 +281,86 @@ export default function TippgeberAdminPage() {
         </main>
 
         <Footer />
+
+        {/* Delete Confirmation Modal */}
+        {deleteConfirmation.isOpen && (
+          <DeleteConfirmationModal
+            confirmation={deleteConfirmation}
+            onConfirm={() => {
+              if (deleteConfirmation.step === 1) {
+                setDeleteConfirmation(prev => ({ ...prev, step: 2 }));
+              } else {
+                handleDelete();
+              }
+            }}
+            onCancel={() => setDeleteConfirmation({ isOpen: false, type: null, item: null, step: 1 })}
+          />
+        )}
       </div>
     </>
+  );
+}
+
+function DeleteConfirmationModal({ 
+  confirmation, 
+  onConfirm, 
+  onCancel 
+}: { 
+  confirmation: DeleteConfirmation;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  const isReferrer = confirmation.type === 'referrer';
+  const itemName = isReferrer ? confirmation.item?.name : confirmation.item?.name;
+  const itemType = isReferrer ? 'Tippgeber' : 'Kontakt';
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-6 max-w-md mx-4">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          {confirmation.step === 1 ? `${itemType} löschen?` : 'Wirklich löschen?'}
+        </h3>
+        
+        {confirmation.step === 1 ? (
+          <div>
+            <p className="text-gray-600 mb-4">
+              Möchten Sie den {itemType} <strong>{itemName}</strong> wirklich löschen?
+            </p>
+            <p className="text-sm text-orange-600 mb-6">
+              ⚠️ Diese Aktion kann nicht rückgängig gemacht werden.
+            </p>
+          </div>
+        ) : (
+          <div>
+            <p className="text-gray-600 mb-4">
+              Sind Sie sich <strong>absolut sicher</strong>, dass Sie <strong>{itemName}</strong> löschen möchten?
+            </p>
+            <p className="text-sm text-red-600 mb-6">
+              🚨 Alle Daten gehen unwiderruflich verloren!
+            </p>
+          </div>
+        )}
+
+        <div className="flex gap-3 justify-end">
+          <button
+            onClick={onCancel}
+            className="px-4 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+          >
+            Abbrechen
+          </button>
+          <button
+            onClick={onConfirm}
+            className={`px-4 py-2 text-white rounded-lg transition-colors ${
+              confirmation.step === 1 
+                ? 'bg-orange-600 hover:bg-orange-700' 
+                : 'bg-red-600 hover:bg-red-700'
+            }`}
+          >
+            {confirmation.step === 1 ? 'Weiter' : 'Endgültig löschen'}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -321,7 +442,9 @@ function AdminPanel({
   activeTab,
   setActiveTab,
   onLogout, 
-  onRefresh 
+  onRefresh,
+  onDeleteReferrer,
+  onDeleteContact
 }: { 
   referrers: Referrer[];
   referrals: Referral[];
@@ -330,6 +453,8 @@ function AdminPanel({
   setActiveTab: (tab: 'referrers' | 'contacts' | 'referrals') => void;
   onLogout: () => void;
   onRefresh: () => void;
+  onDeleteReferrer: (referrer: Referrer) => void;
+  onDeleteContact: (contact: ReferralContact) => void;
 }) {
   const totalVisits = referrers.reduce((sum, ref) => sum + (ref.visitCount || 0), 0);
   const totalContacts = referrers.reduce((sum, ref) => sum + (ref.contactCount || 0), 0);
@@ -414,10 +539,10 @@ function AdminPanel({
 
       <div className="p-6">
         {activeTab === 'referrers' && (
-          <ReferrersList referrers={referrers} />
+          <ReferrersList referrers={referrers} onDelete={onDeleteReferrer} />
         )}
         {activeTab === 'contacts' && (
-          <ReferralContactsList contacts={referralContacts} />
+          <ReferralContactsList contacts={referralContacts} onDelete={onDeleteContact} />
         )}
         {activeTab === 'referrals' && (
           <ReferralsList referrals={referrals} />
@@ -427,7 +552,7 @@ function AdminPanel({
   );
 }
 
-function ReferrersList({ referrers }: { referrers: Referrer[] }) {
+function ReferrersList({ referrers, onDelete }: { referrers: Referrer[]; onDelete: (referrer: Referrer) => void }) {
   if (referrers.length === 0) {
     return (
       <p className="text-gray-500 text-center py-8">
@@ -448,11 +573,19 @@ function ReferrersList({ referrers }: { referrers: Referrer[] }) {
                 Link: www.buchmann.digital/r/{referrer.referralCode}
               </p>
             </div>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              referrer.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-            }`}>
-              {referrer.isActive ? 'Aktiv' : 'Inaktiv'}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                referrer.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}>
+                {referrer.isActive ? 'Aktiv' : 'Inaktiv'}
+              </span>
+              <button
+                onClick={() => onDelete(referrer)}
+                className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded text-xs font-medium transition-colors"
+              >
+                Löschen
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
@@ -537,7 +670,7 @@ function ReferrersList({ referrers }: { referrers: Referrer[] }) {
   );
 }
 
-function ReferralContactsList({ contacts }: { contacts: ReferralContact[] }) {
+function ReferralContactsList({ contacts, onDelete }: { contacts: ReferralContact[]; onDelete: (contact: ReferralContact) => void }) {
   if (contacts.length === 0) {
     return (
       <p className="text-gray-500 text-center py-8">
@@ -558,11 +691,19 @@ function ReferralContactsList({ contacts }: { contacts: ReferralContact[] }) {
                 Empfohlen von: {contact.referrerName} ({contact.referralCode})
               </p>
             </div>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              contact.status === 'new' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
-            }`}>
-              {contact.status === 'new' ? 'Neu' : contact.status}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                contact.status === 'new' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'
+              }`}>
+                {contact.status === 'new' ? 'Neu' : contact.status}
+              </span>
+              <button
+                onClick={() => onDelete(contact)}
+                className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded text-xs font-medium transition-colors"
+              >
+                Löschen
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

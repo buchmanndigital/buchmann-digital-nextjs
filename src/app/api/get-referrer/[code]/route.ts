@@ -4,14 +4,14 @@ import { db } from '@/lib/firebase';
 
 export async function GET(
   request: Request,
-  { params }: { params: { code: string } }
+  { params }: { params: Promise<{ code: string }> }
 ) {
   try {
-    const { code } = params;
+    const { code } = await params;
 
     // Suche Referrer in Firebase
     const q = query(
-      collection(db, 'referrers'), 
+      collection(db, 'referrers'),
       where('referralCode', '==', code),
       where('isActive', '==', true)
     );
@@ -26,15 +26,9 @@ export async function GET(
     }
 
     const referrerDoc = querySnapshot.docs[0];
-    const referrer = {
-      id: referrerDoc.id,
-      ...referrerDoc.data()
-    };
+    const referrerData = { id: referrerDoc.id, ...referrerDoc.data() };
 
-    return NextResponse.json({ 
-      success: true, 
-      referrer 
-    });
+    return NextResponse.json({ referrer: referrerData });
   } catch (error) {
     console.error('Error finding referrer:', error);
     return NextResponse.json(

@@ -40,14 +40,38 @@ export default function ReferralPage() {
   useEffect(() => {
     const trackVisit = async () => {
       try {
-        // Track page visit
-        await fetch('/api/referral-visit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            referralCode: code
-          })
-        });
+        // Prüfe localStorage ob dieser Referral-Code bereits besucht wurde
+        const visitedReferrals = JSON.parse(localStorage.getItem('visitedReferrals') || '{}');
+        const now = new Date().getTime();
+        const twentyFourHours = 24 * 60 * 60 * 1000; // 24 Stunden in Millisekunden
+        
+        // Prüfe ob bereits ein Visit für diesen Code gespeichert ist
+        const lastVisit = visitedReferrals[code];
+        
+        // Wenn kein Visit vorhanden oder länger als 24 Stunden her
+        if (!lastVisit || (now - lastVisit) > twentyFourHours) {
+          // Track page visit
+          await fetch('/api/referral-visit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              referralCode: code
+            })
+          });
+          
+          // Speichere den aktuellen Zeitstempel im localStorage
+          visitedReferrals[code] = now;
+          
+          // Bereinige alte Einträge (älter als 30 Tage)
+          const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+          Object.keys(visitedReferrals).forEach(key => {
+            if ((now - visitedReferrals[key]) > thirtyDays) {
+              delete visitedReferrals[key];
+            }
+          });
+          
+          localStorage.setItem('visitedReferrals', JSON.stringify(visitedReferrals));
+        }
       } catch (error) {
         console.error('Error tracking visit:', error);
       }
