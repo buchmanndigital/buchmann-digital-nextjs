@@ -18,6 +18,7 @@ const services = [
   { id: 'website', name: 'Professionelle Website' },
   { id: 'webshop', name: 'Online-Shop' },
   { id: 'webapp', name: 'Web-Anwendung' },
+  { id: 'app', name: 'APP Entwicklung' },
   { id: 'seo', name: 'Suchmaschinenoptimierung (SEO)' },
   { id: 'ads', name: 'Google Ads / Online-Werbung' },
   { id: 'social_media', name: 'Social Media Marketing' },
