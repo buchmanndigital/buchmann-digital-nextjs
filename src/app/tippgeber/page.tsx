@@ -66,7 +66,7 @@ export default function TippgeberPage() {
       />
       
       <div className="min-h-screen bg-gray-50">
-        <Header />
+        <Header hiddenMenuItems={['bewertungen', 'roadmap']} />
         
         <main className="container mx-auto px-4 pt-24 pb-16">
           <div className="max-w-4xl mx-auto">

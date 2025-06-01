@@ -6,7 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
-export function Header() {
+interface HeaderProps {
+  hiddenMenuItems?: string[];
+}
+
+export function Header({ hiddenMenuItems = [] }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -16,6 +20,10 @@ export function Header() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  const shouldShowMenuItem = (itemId: string) => {
+    return !hiddenMenuItems.includes(itemId);
   };
 
   return (
@@ -50,18 +58,22 @@ export function Header() {
           </button>
 
           <nav className="hidden lg:flex items-center gap-8">
-            <button 
-              className="text-gray-600 hover:text-gray-900"
-              onClick={() => scrollToSection('bewertungen')}
-            >
-              Bewertungen
-            </button>
-            <button 
-              className="text-gray-600 hover:text-gray-900"
-              onClick={() => scrollToSection('roadmap')}
-            >
-              Dein Weg
-            </button>
+            {shouldShowMenuItem('bewertungen') && (
+              <button 
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => scrollToSection('bewertungen')}
+              >
+                Bewertungen
+              </button>
+            )}
+            {shouldShowMenuItem('roadmap') && (
+              <button 
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => scrollToSection('roadmap')}
+              >
+                Dein Weg
+              </button>
+            )}
             <Button 
               className="bg-indigo-600 hover:bg-indigo-700 text-white px-6"
               onClick={() => scrollToSection('kontakt')}
@@ -83,18 +95,22 @@ export function Header() {
               >
                 Startseite
               </button>
-              <button 
-                className="text-gray-600 hover:text-gray-900 py-2"
-                onClick={() => scrollToSection('bewertungen')}
-              >
-                Bewertungen
-              </button>
-              <button 
-                className="text-gray-600 hover:text-gray-900 py-2"
-                onClick={() => scrollToSection('roadmap')}
-              >
-                Dein Weg
-              </button>
+              {shouldShowMenuItem('bewertungen') && (
+                <button 
+                  className="text-gray-600 hover:text-gray-900 py-2"
+                  onClick={() => scrollToSection('bewertungen')}
+                >
+                  Bewertungen
+                </button>
+              )}
+              {shouldShowMenuItem('roadmap') && (
+                <button 
+                  className="text-gray-600 hover:text-gray-900 py-2"
+                  onClick={() => scrollToSection('roadmap')}
+                >
+                  Dein Weg
+                </button>
+              )}
               <Button 
                 className="bg-indigo-600 hover:bg-indigo-700 text-white w-full"
                 onClick={() => scrollToSection('kontakt')}
