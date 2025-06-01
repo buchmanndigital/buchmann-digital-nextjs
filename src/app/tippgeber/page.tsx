@@ -71,11 +71,71 @@ export default function TippgeberPage() {
         <main className="container mx-auto px-4 pt-24 pb-16">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Als Tippgeber anmelden
-              </h1>
-              <p className="text-xl text-gray-600">
-                Melde dich als Tippgeber an und erhalte einen personalisierten Empfehlungslink.
+              {/* Hook Section */}
+              <div className="bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-8 mb-8">
+                <div className="max-w-3xl mx-auto">
+                  <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+                    💡 Du kennst ein Unternehmen, das eine neue Website braucht?
+                  </h1>
+                  <p className="text-lg md:text-xl text-gray-600 mb-6">
+                    Oder eine App? Einen Online-Shop? Besseres SEO? Dann werde jetzt Tippgeber und verdiene mit!
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-white/50">
+                      <div className="text-2xl mb-2">🎯</div>
+                      <h3 className="font-semibold text-gray-800 mb-1">Einfach empfehlen</h3>
+                      <p className="text-sm text-gray-600">Teile deinen persönlichen Link</p>
+                    </div>
+                    <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-white/50">
+                      <div className="text-2xl mb-2">💰</div>
+                      <h3 className="font-semibold text-gray-800 mb-1">Geld verdienen</h3>
+                      <p className="text-sm text-gray-600">5-10% Provision pro Projekt</p>
+                    </div>
+                    <div className="bg-white/70 backdrop-blur-sm rounded-lg p-4 border border-white/50">
+                      <div className="text-2xl mb-2">🤝</div>
+                      <h3 className="font-semibold text-gray-800 mb-1">Win-Win-Win</h3>
+                      <p className="text-sm text-gray-600">Alle Beteiligten profitieren</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg p-6">
+                    <h2 className="text-lg md:text-xl font-bold mb-4">🚀 Beispiel-Rechnung</h2>
+                    
+                    {/* Desktop Version */}
+                    <div className="hidden md:flex items-center justify-center gap-4 text-lg">
+                      <span className="bg-white/20 px-3 py-1 rounded">Projekt: 5.000€</span>
+                      <span className="text-yellow-300">→</span>
+                      <span className="bg-white/20 px-3 py-1 rounded">Deine Provision: 250-500€</span>
+                      <span className="text-2xl">🎉</span>
+                    </div>
+                    
+                    {/* Mobile Version */}
+                    <div className="md:hidden space-y-3">
+                      <div className="text-center">
+                        <div className="bg-white/20 px-4 py-2 rounded-lg inline-block text-base font-medium">
+                          💼 Projekt: 5.000€
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-yellow-300 text-2xl mb-2">↓</div>
+                        <div className="bg-white/20 px-4 py-2 rounded-lg inline-block text-base font-medium">
+                          💰 Deine Provision: 250-500€
+                        </div>
+                      </div>
+                      <div className="text-center text-2xl">🎉</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Title */}
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Werde jetzt Tippgeber!
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Registriere dich kostenlos, erhalte deinen personalisierten Empfehlungslink 
+                und starte sofort mit dem Geld verdienen.
               </p>
             </div>
 
@@ -123,7 +183,7 @@ function FAQSection({ faqData }: { faqData: Array<{ question: string; answer: st
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm">
+    <div className="bg-white rounded-lg shadow-sm pb-6">
       <div className="divide-y divide-gray-200">
         {faqData.map((faq, index) => (
           <div key={index} className="p-6">
@@ -164,7 +224,7 @@ function FAQSection({ faqData }: { faqData: Array<{ question: string; answer: st
         ))}
       </div>
       
-      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 m-6 rounded-lg">
+      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 mx-6 mt-6 rounded-lg">
         <div className="text-center">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             Noch Fragen?
