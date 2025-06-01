@@ -6,43 +6,188 @@ import { db } from '@/lib/firebase';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import Link from 'next/link';
+import { faqStructuredData, organizationStructuredData } from './metadata';
 
 export default function TippgeberPage() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [referralLink, setReferralLink] = useState('');
 
+  const faqData = [
+    {
+      question: "Wie viel Provision kann ich als Tippgeber verdienen?",
+      answer: "Als Tippgeber erhältst du eine attraktive Provision von 5-10% vom Projektwert, abhängig von der Projektgröße. Bei einem durchschnittlichen Projekt von 5.000€ sind das bereits 250-500€ für dich. Die genauen Konditionen besprechen wir gerne persönlich."
+    },
+    {
+      question: "Wann und wie erhalte ich meine Provision?",
+      answer: "Deine Provision wird ausgezahlt, sobald der empfohlene Kunde sein Projekt erfolgreich gestartet und die erste Rechnung beglichen hat. Die Auszahlung erfolgt per Banküberweisung innerhalb von 14 Tagen nach Projektstart."
+    },
+    {
+      question: "Kann ich mehrere Kunden empfehlen?",
+      answer: "Ja, selbstverständlich! Es gibt keine Begrenzung für die Anzahl der Empfehlungen. Je mehr qualifizierte Kunden du empfiehlst, desto mehr kannst du verdienen. Dein personalisierter Link trackt automatisch alle Empfehlungen."
+    },
+    {
+      question: "Was passiert, wenn ein empfohlener Kunde kein Projekt startet?",
+      answer: "Keine Sorge! Du erhältst nur dann eine Provision, wenn aus der Empfehlung tatsächlich ein bezahltes Projekt entsteht. Es entstehen dir keine Kosten oder Verpflichtungen, wenn eine Empfehlung nicht zum Projektabschluss führt."
+    },
+    {
+      question: "Wie kann ich meinen Empfehlungslink am besten teilen?",
+      answer: "Du kannst deinen Link ganz einfach in persönlichen Gesprächen, E-Mails, WhatsApp-Nachrichten oder sozialen Medien teilen. Am besten funktionieren persönliche Empfehlungen mit einer kurzen Erklärung, warum du Buchmann Digital weiterempfiehlst."
+    }
+  ];
+
+  // Erweiterte Metadaten für bessere SEO
+  useEffect(() => {
+    // Dynamisch Titel und Meta-Description für die Seite setzen
+    document.title = 'Als Tippgeber anmelden | Buchmann Digital Empfehlungsprogramm';
+    
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Werde Tippgeber bei Buchmann Digital und verdiene 5-10% Provision für jede erfolgreiche Empfehlung. Einfache Anmeldung, personalisierter Link, faire Konditionen.');
+    }
+
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', 'https://buchmann.digital/tippgeber');
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <>
+      {/* Strukturierte Daten für Google - FAQ Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
       
-      <main className="container mx-auto px-4 pt-24 pb-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Als Tippgeber anmelden
-            </h1>
-            <p className="text-xl text-gray-600">
-              Melde dich als Tippgeber an und erhalte einen personalisierten Empfehlungslink.
-            </p>
-          </div>
+      {/* Strukturierte Daten für Google - Organization Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
+      />
+      
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        
+        <main className="container mx-auto px-4 pt-24 pb-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">
+                Als Tippgeber anmelden
+              </h1>
+              <p className="text-xl text-gray-600">
+                Melde dich als Tippgeber an und erhalte einen personalisierten Empfehlungslink.
+              </p>
+            </div>
 
-          <div className="max-w-2xl mx-auto">
-            <TippgeberSignupForm onSuccess={(link) => {
-              setReferralLink(link);
-              setShowSuccessMessage(true);
-            }} />
-          </div>
+            <div className="max-w-2xl mx-auto">
+              <TippgeberSignupForm onSuccess={(link) => {
+                setReferralLink(link);
+                setShowSuccessMessage(true);
+              }} />
+            </div>
 
-          {showSuccessMessage && (
-            <SuccessMessage 
-              referralLink={referralLink}
-              onClose={() => setShowSuccessMessage(false)} 
-            />
-          )}
+            {showSuccessMessage && (
+              <SuccessMessage 
+                referralLink={referralLink}
+                onClose={() => setShowSuccessMessage(false)} 
+              />
+            )}
+
+            {/* FAQ Section */}
+            <div className="max-w-4xl mx-auto mt-16">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  Häufig gestellte Fragen
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Alle wichtigen Informationen zum Tippgeber-Programm
+                </p>
+              </div>
+
+              <FAQSection faqData={faqData} />
+            </div>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    </>
+  );
+}
+
+function FAQSection({ faqData }: { faqData: Array<{ question: string; answer: string }> }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-sm">
+      <div className="divide-y divide-gray-200">
+        {faqData.map((faq, index) => (
+          <div key={index} className="p-6">
+            <button
+              onClick={() => toggleFAQ(index)}
+              className="w-full text-left flex justify-between items-start group"
+            >
+              <h3 className="text-lg font-semibold text-gray-900 pr-4 group-hover:text-indigo-600 transition-colors">
+                {faq.question}
+              </h3>
+              <div className="flex-shrink-0 ml-6">
+                <svg
+                  className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${
+                    openIndex === index ? 'transform rotate-180' : ''
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </button>
+            
+            <div className={`overflow-hidden transition-all duration-300 ${
+              openIndex === index ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+            }`}>
+              <p className="text-gray-600 leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-6 m-6 rounded-lg">
+        <div className="text-center">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            Noch Fragen?
+          </h3>
+          <p className="text-gray-600 mb-4">
+            Kontaktiere mich gerne für ein persönliches Gespräch über das Tippgeber-Programm.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="tel:+4917491650008"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition-colors font-medium"
+            >
+              📞 +49 174 9165008
+            </a>
+            <a
+              href="mailto:info@buchmann.digital"
+              className="bg-white hover:bg-gray-50 text-indigo-600 border border-indigo-200 px-6 py-2 rounded-lg transition-colors font-medium"
+            >
+              ✉️ info@buchmann.digital
+            </a>
+          </div>
         </div>
-      </main>
-
-      <Footer />
+      </div>
     </div>
   );
 }
